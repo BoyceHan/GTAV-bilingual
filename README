@@ -8,7 +8,7 @@
 	
 	3. Run OpenIV, select GTAV (Windows)
 	
-	4. Turn to ./update/update.rpf/data/lang
+	4. Turn to ./update/update.rpf/x64/data/lang
 	
 	5. In this directory you will find language packages such as "american.rpf" and "chinesesimp.rpf"
 	
@@ -47,7 +47,7 @@
 		KEEP "american.rpf" NOT MODIFIED ASSURES THAT YOU CAN ALWAYS RUN ENGLISH LANGUAGE VERSION OF GTAV CORRECTLY.
 		English version is the most stable version of GTAV. Running of English version NEVER relys on other language packages. Vice NOT Versa, NOT. 
 	
-	14. INSTALL 
+	14. In OpenIV install ASI Loader and OpenIV.ASI
 	
 	15. Run GTAV and enjoy!
 
@@ -61,7 +61,7 @@
 	
 	3. 启动OpenIV, 选择GTAV (Windows)
 	
-	4. 进入目录 ./update/update.rpf/data/lang
+	4. 进入目录 ./update/update.rpf/x64/data/lang
 	
 	5. 在此目录中您将找到若干语言包，其名称类似于 "american.rpf" 和 "chinesesimp.rpf"
 	
@@ -99,6 +99,6 @@
 		不要这样做，绝对不要。
 		保持 "american.rpf" 不变，这能保证英语版本永远是正确无误的。英语版本是GTAV最稳定的版本，运行英语版不依赖其他语言包。反之不然，不然！
 	
-	14. INSTALL 
+	14. 在OpenIV中安装ASI Loader和OpenIV.ASI
 	
 	15. 打开GTAV，开玩。
