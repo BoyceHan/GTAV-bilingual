@@ -10,7 +10,7 @@ path_merged = './merged/'
 #- #### (english) DO NOT MODIFY ANYTHING BELOW UNLESS YOU HAVE KNOWLEDGE OF PYTHON #### -#
 #- #### (chinese)          除非您懂得PYTHON语言，否则不要修改下方的代码            #### -#
 
-
+NO_NEWLINE_FILES = ['global.gxt2','clo_mnu.gxt2']
 cnt_all = 0
 cnt_skip = 0
 
@@ -104,12 +104,12 @@ class GXT2:
 	#enddef __init__
 	
 	def append_another(self,ano):
-		global cnt_all,cnt_skip
+		global cnt_all,cnt_skip,NO_NEWLINE_FILES
 		for id in self.recordsbyid:
 			if id in ano.recordsbyid:
 				cnt_all += 1
 				if not_same(self.recordsbyid[id],ano.recordsbyid[id]):
-					if self.fname=='global.gxt2':
+					if self.fname in NO_NEWLINE_FILES:
 						self.recordsbyid[id] = self.recordsbyid[id] + ano.recordsbyid[id];
 					else:
 						self.recordsbyid[id] = self.recordsbyid[id] + b'~n~' + ano.recordsbyid[id];
