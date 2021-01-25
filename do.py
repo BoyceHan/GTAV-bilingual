@@ -178,8 +178,8 @@ for fname in A:
 	f1 = GXT2(path_language1+'/'+fname,fname)
 	f2 = GXT2(path_language2+'/'+fname,fname)
 	f1.append_another(f2)
-	#f1.save(path_merged+fname)
-	#ftest = GXT2(path_merged+fname,fname)
+	f1.save(path_merged+fname)
+	ftest = GXT2(path_merged+fname,fname)
 	print('DONE')
 
 print('All=%d Merged=%d Skipped=%d\n'%(cnt_all,cnt_all-cnt_skip,cnt_skip))
