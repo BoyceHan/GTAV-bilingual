@@ -58,6 +58,10 @@ def judge_newline_globalgxt2(chinese,english):
 	
 	CHINESE_FULLSTOP_SIGN = '。'
 	CHINESE_FULLSTOP_SIGN_UTF8 = bytes(CHINESE_FULLSTOP_SIGN,encoding='utf-8')
+	CHINESE_QUESTION_MARK = '？'
+	CHINESE_QUESTION_MARK_UTF8 = bytes(CHINESE_QUESTION_MARK,encoding='utf-8')
+	CHINESE_EXCLAMATION_MARK = '！'
+	CHINESE_EXCLAMATION_MARK_UTF8 = bytes(CHINESE_EXCLAMATION_MARK,encoding='utf-8')
 	
 	if path_language1.find('chinese')<0 and path_language2.find('chinese')<0:
 		return b''
@@ -67,7 +71,7 @@ def judge_newline_globalgxt2(chinese,english):
 	if english.find(b'~n~')>=0:
 		return b'~n~'
 	
-	if chinese.find(CHINESE_FULLSTOP_SIGN_UTF8)>=0:
+	if chinese.find(CHINESE_FULLSTOP_SIGN_UTF8)>=0 or chinese.find(CHINESE_QUESTION_MARK_UTF8)>=0 or chinese.find(CHINESE_EXCLAMATION_MARK_UTF8)>=0:
 		return b'~n~'
 	
 	return b''
