@@ -56,8 +56,10 @@ def not_same(a,b):
 class GXT2:
 	n_records = 0
 	recordsbyid = {}
+	fname = ''
 	
-	def __init__(self,path):
+	def __init__(self,path,fname):
+		self.fname = fname
 		fsize = os.path.getsize(path)
 		if fsize==0:
 			return
@@ -107,7 +109,10 @@ class GXT2:
 			if id in ano.recordsbyid:
 				cnt_all += 1
 				if not_same(self.recordsbyid[id],ano.recordsbyid[id]):
-					self.recordsbyid[id] = self.recordsbyid[id] + ano.recordsbyid[id];
+					if self.fname=='global.gxt2':
+						self.recordsbyid[id] = self.recordsbyid[id] + ano.recordsbyid[id];
+					else:
+						self.recordsbyid[id] = self.recordsbyid[id] + b'~n~' + ano.recordsbyid[id];
 				else:
 					cnt_skip += 1
 	#enddef merge
@@ -148,11 +153,11 @@ if A!=A2:
 	raise Exception('Error: Language Packages are Different.')
 for fname in A:
 	print(fname,end=' ')
-	f1 = GXT2(path_language1+'/'+fname)
-	f2 = GXT2(path_language2+'/'+fname)
+	f1 = GXT2(path_language1+'/'+fname,fname)
+	f2 = GXT2(path_language2+'/'+fname,fname)
 	f1.append_another(f2)
 	f1.save(path_merged+fname)
-	ftest = GXT2(path_merged+fname)
+	ftest = GXT2(path_merged+fname,fname)
 	print('DONE')
 
 print('All=%d Merged=%d Skipped=%d\n'%(cnt_all,cnt_all-cnt_skip,cnt_skip))
