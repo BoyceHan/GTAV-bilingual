@@ -53,6 +53,28 @@ def not_same(a,b):
 	return True
 #enddef not_same
 
+def not_no_chinese_if_either_language_is_chinese(chinese,english):
+	# THIS FUNCTION WORKS FOR CHINESE US-ENGLISH MERGEING ONLY
+	
+	CHINESE_RANGES = [(0x4E00,0x9FA5),(0x9FA6,0x9FEF),(0x3400,0x4DB5),(0x20000,0x2A6D6),(0x2A700,0x2B734),(0x2B740,0x2B81D),(0x2B820,0x2CEA1),(0x2CEB0,0x2EBE0),(0x30000,0x3134A),(0x2F00,0x2FD5),(0x2E80,0x2EF3),(0xF900,0xFAD9),(0x2F800,0x2FA1D),(0xE815,0xE86F),(0xE400,0xE5E8),(0xE600,0xE6CF),(0x31C0,0x31E3),(0x2FF0,0x2FFB),(0x3105,0x312F),(0x31A0,0x31BA),(0x3007,0x3007)]
+	if path_language1.find('chinese')<0 and path_language2.find('chinese')<0:
+		return True # NEITHER CHINESE
+	if path_language2.find('chinese')>=0:
+		chinese,english = english,chinese
+	
+	try:
+		chinese = str(chinese,encoding='utf-8')
+		for char in chinese:
+			for r in CHINESE_RANGES:
+				if r[0]<=ord(char) and ord(char)<=r[1]:
+					return True
+		return False #NO CHINESE 
+	except:
+		pass
+		
+	return True # str() Convert ERROR, this is not a text; this function is used in `and` sentance so return True to return NULL 
+#enddef not_no_chinese_if_either_language_is_chinese
+
 def judge_newline_globalgxt2(chinese,english):
 	# THIS FUNCTION WORKS FOR CHINESE US-ENGLISH MERGEING ONLY
 	
@@ -136,7 +158,7 @@ class GXT2:
 		for id in self.recordsbyid:
 			if id in ano.recordsbyid:
 				cnt_all += 1
-				if not_same(self.recordsbyid[id],ano.recordsbyid[id]):
+				if not_same(self.recordsbyid[id],ano.recordsbyid[id]) and not_no_chinese_if_either_language_is_chinese(self.recordsbyid[id],ano.recordsbyid[id]):
 					if self.fname in NO_NEWLINE_FILES:
 						self.recordsbyid[id] = self.recordsbyid[id] + ano.recordsbyid[id];
 					elif self.fname=='global.gxt2':
