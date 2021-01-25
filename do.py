@@ -10,7 +10,7 @@ path_merged = './merged/'
 #- #### (english) DO NOT MODIFY ANYTHING BELOW UNLESS YOU HAVE KNOWLEDGE OF PYTHON #### -#
 #- #### (chinese)          除非您懂得PYTHON语言，否则不要修改下方的代码            #### -#
 
-NO_NEWLINE_FILES = ['global.gxt2','clo_mnu.gxt2']
+NO_NEWLINE_FILES = ['clo_mnu.gxt2']
 cnt_all = 0
 cnt_skip = 0
 
@@ -52,6 +52,26 @@ def not_same(a,b):
 		pass
 	return True
 #enddef not_same
+
+def judge_newline_globalgxt2(chinese,english):
+	# THIS FUNCTION WORKS FOR CHINESE US-ENGLISH MERGEING ONLY
+	
+	CHINESE_FULLSTOP_SIGN = '。'
+	CHINESE_FULLSTOP_SIGN_UTF8 = bytes(CHINESE_FULLSTOP_SIGN,encoding='utf-8')
+	
+	if path_language1.find('chinese')<0 and path_language2.find('chinese')<0:
+		return b''
+	if path_language2.find('chinese')>=0:
+		chinese,english = english,chinese
+	
+	if english.find(b'~n~')>=0:
+		return b'~n~'
+	
+	if chinese.find(CHINESE_FULLSTOP_SIGN_UTF8)>=0:
+		return b'~n~'
+	
+	return b''
+#enddef judge_newline_globalgxt2
 
 class GXT2:
 	n_records = 0
@@ -111,6 +131,8 @@ class GXT2:
 				if not_same(self.recordsbyid[id],ano.recordsbyid[id]):
 					if self.fname in NO_NEWLINE_FILES:
 						self.recordsbyid[id] = self.recordsbyid[id] + ano.recordsbyid[id];
+					elif self.fname=='global.gxt2':
+						self.recordsbyid[id] = self.recordsbyid[id] + judge_newline_globalgxt2(self.recordsbyid[id],ano.recordsbyid[id]) + ano.recordsbyid[id];
 					else:
 						self.recordsbyid[id] = self.recordsbyid[id] + b'~n~' + ano.recordsbyid[id];
 				else:
@@ -156,8 +178,8 @@ for fname in A:
 	f1 = GXT2(path_language1+'/'+fname,fname)
 	f2 = GXT2(path_language2+'/'+fname,fname)
 	f1.append_another(f2)
-	f1.save(path_merged+fname)
-	ftest = GXT2(path_merged+fname,fname)
+	#f1.save(path_merged+fname)
+	#ftest = GXT2(path_merged+fname,fname)
 	print('DONE')
 
 print('All=%d Merged=%d Skipped=%d\n'%(cnt_all,cnt_all-cnt_skip,cnt_skip))
