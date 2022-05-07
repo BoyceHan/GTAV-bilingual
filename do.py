@@ -10,7 +10,7 @@ path_merged = './merged/'
 #- #### (english) DO NOT MODIFY ANYTHING BELOW UNLESS YOU HAVE KNOWLEDGE OF PYTHON #### -#
 #- #### (chinese)          除非您懂得PYTHON语言，否则不要修改下方的代码            #### -#
 
-NO_NEWLINE_FILES = ['clo_mnu.gxt2']
+NO_NEWLINE_FILES = ['clo_mnu.gxt2','mishsta.gxt2']
 cnt_all = 0
 cnt_skip = 0
 
